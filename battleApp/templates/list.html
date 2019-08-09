@@ -1,0 +1,153 @@
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>해해해커톤</title>
+  <style>
+    #post {
+      z-index: 300;
+      display: inline-block;
+      position: absolute;
+      top: 70%;
+      left: 80%;
+
+    }
+
+    body {
+      box-sizing: border-box;
+      margin: 0px;
+      padding: 0px;
+      position: absolute;
+      background-color: #E6E6E6;
+    }
+
+    #container {
+      width: 1900px;
+      margin: auto;
+      background-color: white;
+
+
+    }
+
+    #left {
+      width: 500px;
+      height: 900px;
+      float: left;
+      background: linear-gradient(-200deg, #711616, #581569);
+
+    }
+
+    #banner {
+      padding: 30px;
+      margin-bottom: 10px;
+      font-size: 25px;
+      width: 1000px;
+    }
+
+    #selection {
+      padding: 30px;
+      margin-bottom: 10px;
+      width: 1000px;
+    }
+
+    select {
+      color: gray;
+      border: white;
+    }
+
+    #list {
+      width: 450px;
+      height: 300px;
+      border: solid #ECEBEB 1px;
+      border-radius: 15px 15px;
+      box-shadow: 1px 1px 2px 1px gray;
+      display: inline-block;
+      margin: 20px;
+
+    }
+
+    #toplist {
+      height: 30px;
+      padding: 0 20px;
+      padding-top: 20px;
+    }
+
+    #contentlist {
+      height: 140px;
+      padding: 0 20px;
+      padding-top: 60px;
+      vertical-align: middle;
+      text-align: center;
+      font-size: 30px;
+    }
+
+    #bottomlist {
+      height: 30px;
+      padding: 0 20px;
+      padding-top: 20px;
+    }
+
+    #bottomright {
+      float: right;
+    }
+
+    #bottomleft {
+      float: left;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="post">
+    <a href="{% url 'newpost' %}">
+      <img src="post.png">
+
+    </a>
+  </div>
+
+  <div id="container">
+    <div id="left">
+      <img src="togizang.png" width="500" height="900">
+    </div>
+    <div id="banner">
+      투기장 게시글을 올려 싸움을 걸어보세요
+    </div>
+    <!--banner-->
+    <div id="selection">
+      <select name="gizun">
+        <option value="">최신 순</option>
+      </select>
+    </div>
+    <!--selection-->
+
+    {% for post in posts.all %}
+
+    <div id="list">
+      <a href="{% url 'detail' post.id %}">
+        <div id="toplist">
+          {{post.TorI}}
+        </div>
+        <div id="contentlist">
+          {{post.title}}
+        </div>
+        <div id="bottomlist">
+          <div id="bottomleft">
+            {{post.pub_date}}
+          </div>
+          <div id="bottomright">
+            {{post.Writer}}
+          </div>
+        </div>
+        <!--bottom-->
+      </a>
+    </div>
+
+
+    {% endfor%}
+    <!--container-->
+  </div>
+
+
+</body>
+
+</html>

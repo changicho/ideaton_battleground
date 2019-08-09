@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style>
+    body{
+background-color:#E6E6E6;
+    }
+    #container{
+      margin:auto;
+      margin-top:50px;
+      border:1px solid black;
+      width:400px;
+      height:800px;
+      background: linear-gradient(-200deg, #711616 , #581569);
+
+    }
+    #loginmsg{
+      padding-top:200px;
+      padding-left:50px;
+      padding-right:50px;
+      padding-bottom:100px;
+      text-align:center;
+      color:white;
+    }
+    #login{
+      display:inline-block;
+      padding-bottom:100px;
+      font-size:15px;
+      text-align:center;
+    }
+    input{
+      width:350px;
+      height:60px;
+      border:none;
+      background:transparent;
+      border-bottom:1px solid white;
+      color:white;
+    }
+    form{
+      padding:20px;
+      padding-bottom:100px;
+
+
+    }
+    #login button{
+      background-color:white;
+      border-radius:15px 15px;
+      color:#DF3A01;
+      width: 300px;
+      height:50px;
+      margin-left:50px;
+      margin-right:50px;
+      margin-bottom:10px;
+    }
+    #login a{
+      color:white;
+    }
+
+
+      </style>
+  </head>
+  <body>
+  {% block content %}
+
+  {% if error %}
+  {{ error }}
+  <br>
+  <br>
+  {% endif %}
+  <form method="POST" action="{% url 'signup'%}">
+  {% csrf_token %}
+    <div id = "container">
+      <div id = "loginmsg">
+        회원가입
+      </div>
+      <div id = "login">
+        <form>
+          <input name = "username" type="text" value="" placeholder="아이디">
+          <br>
+          <input name = "password1" type="password" value="" placeholder="비밀번호">
+          <br>
+          <input name = "password2" type="password" value="" placeholder="비밀번호 확인">
+          <br>
+        </form>
+
+      <button type = "submit" onClick="home" >회원 등록하기</button>
+
+      </div>
+</form>
+{% endblock %}
+
+
+  </body>
+</html>

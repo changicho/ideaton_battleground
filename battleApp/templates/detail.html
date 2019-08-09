@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <style>
+    body {
+      box-sizing: border-box;
+    }
+
+    #container {
+      width: 1000px;
+      margin: auto;
+      height: auto;
+      padding: 40px;
+      border: 1px solid black;
+      word-break: break-all;
+      box-sizing: border-box;
+    }
+
+    #title {
+      margin-bottom: 40px;
+      display: inline-block;
+
+    }
+
+    #titleleft {
+      font-size: 30px;
+      color: gray;
+      display: inline;
+      margin-right: 30px;
+    }
+
+    #titleright {
+      display: inline-block;
+      font-size: 30px;
+    }
+
+    #content {
+      display: inline-block;
+      padding-bottom: 80px;
+    }
+
+    #contentleft {
+      font-size: 30px;
+      color: gray;
+      margin-right: 30px;
+      display: inline-block;
+      margin-bottom: 20px;
+    }
+
+    #contentright {
+      font-size: 20px;
+      display: inline-block;
+    }
+
+    #comment {}
+
+    #select {
+      width: 600px;
+      height: 50px;
+      border: solid black 1px;
+
+    }
+
+    #selectleft {
+      width: 300px;
+      float: left;
+      height: 50px;
+      background-color: black;
+    }
+
+    #selectright {
+      width: 300px;
+      float: right;
+      height: 50px;
+      background-color: yellow;
+    }
+
+    #commentbutton {
+      float: right;
+    }
+
+    input[type=button] {
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(-200deg, #711616, #581569);
+      color: white;
+      border: 0px;
+    }
+
+    #commentlist {
+      width: 920px;
+      height: 1000px;
+      border: 1px solid black;
+      padding: 10px;
+    }
+
+    #leftcomment {
+      width: 700px;
+      height: 80px;
+      border: 1px solid black;
+      display: block;
+
+    }
+
+    #leftprofile {
+      float: left;
+      width: 100px;
+      height: 80px;
+      background-color: blue;
+      margin-right: 10px;
+    }
+
+    #leftmsg {
+      height: 80px;
+      vertical-align: middle;
+      line-height: 80px;
+    }
+
+    #rightcomment {
+      width: 700px;
+      height: 80px;
+      border: 1px solid black;
+      display: block;
+
+    }
+
+    #rightprofile {
+      float: right;
+      width: 100px;
+      height: 80px;
+      background-color: red;
+      margin-left: 10px;
+    }
+
+    #rightmsg {
+      float: right;
+      height: 80px;
+      vertical-align: middle;
+      line-height: 80px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="container">
+    <div id="title">
+      <div id="titleleft">
+        제목
+      </div>
+      <div id="titleright">
+        {{post.title}}
+      </div>
+    </div>
+    <br>
+
+    <div id="content">
+
+      <div id="contentleft">
+        내용
+      </div>
+      <div id="contentright">
+        {{post.body}}
+      </div>
+    </div>
+
+    <div id="comment">
+      <form action="{% url 'comment_write' post_id=post.id %}" method="POST">
+        {% csrf_token %}
+        <div id="select box">
+          <input type="radio" value="agree" name="type">찬성
+          <input type="radio" value="reject" name="type">반대
+        </div>
+
+        <textarea rows="5" cols="100" name="contents"></textarea>
+
+        <div id="commentbutton">
+          <input type="submit" value="등록하기" />
+
+        </div>
+      </form>
+    </div>
+
+    <div id="commentlist">
+      {% for comment in post.comments.all %}
+      <div class="comment {{ comment.comment_type }}">
+        <div class="date">{{ comment.comment_date }}</div>
+        <p>{{ comment.comment_contents }}</p>
+      </div>
+      {% empty %}
+      <p>댓글이 아직 없습니다.</p>
+      {% endfor %}
+
+      <div id="leftcomment">
+        <div id="leftprofile">
+        </div>
+        <div id="leftmsg">
+          가나다라
+        </div>
+      </div>
+
+      <div id="rightcomment">
+        <div id="rightprofile">
+        </div>
+        <div id="rightmsg">
+          마바사아
+        </div>
+      </div>
+    </div>
+
+
+
+  </div>
+  <script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+
+</body>
+
+</html>
